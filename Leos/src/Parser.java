@@ -13,7 +13,12 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 public class Parser {
 	
-	
+	/**
+	 * 
+	 * @param file		the employee file
+	 * @return			arrayList with all employees
+	 * @throws IOException	if file cannot be opened for any reason
+	 */
 	public ArrayList<Employee> parseEmployees(File file) throws IOException {
 		ArrayList<Employee> employees = new ArrayList<>();
 		FileInputStream fis = new FileInputStream(file);
@@ -35,7 +40,6 @@ public class Parser {
                     		   n = 0;
                     		   tempDate = cell.getText();
                     	   }
-                   
                 	   }
                 	   n++;
             	   }
@@ -44,10 +48,15 @@ public class Parser {
                }
 		   }
 		   return employees;
-           }
+		   }
        
 
-	
+	/**
+	 * 
+	 * @param file	the stock list file
+	 * @return		arrayList of items
+	 * @throws IOException	if file cannot be opened for any reason
+	 */
 	public ArrayList<Item> parseItems(File file) throws IOException{
 		ArrayList<Item> items = new ArrayList<>();
 		FileInputStream fis = new FileInputStream(file);

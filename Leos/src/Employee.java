@@ -19,7 +19,11 @@ public class Employee {
     private boolean canWorkOvernight = false;
     private boolean alreadyNo = false;
    // private HashMap<DayOfWeek, AvailabilityTime> availability;
-    
+    /**
+     * 
+     * @param name	namme of the employee
+     * @param availablility	availability of the employee
+     */
     public Employee(String name, String availablility) {
         this.name = name;
         String[] days = availablility.split(", ");
@@ -32,7 +36,10 @@ public class Employee {
             }
         }
     }
-    
+    /**
+     * All ranges are from Monday - Friday
+     * To fix.
+     */
     public void parseRange(){
         canWorkMonday = true;
         canWorkTuesday = true;
@@ -41,6 +48,11 @@ public class Employee {
         canWorkFriday = true;
     }
     
+    /**
+     * Sets work conditions to true or false
+     * 
+     * @param a   Parsed string
+     */
     public void parseAvailability(String[] a){
         DayOfWeek day = null;
         for (int i = 0; i < a.length; i++){
@@ -70,6 +82,10 @@ public class Employee {
         }
     }
     
+    /**
+     * Checks if they can/cannot work overnight
+     * @param a  Parsed string
+     */
     private void checkOvernight(String a){
         if(a.equals("overnight") && !alreadyNo){
             canWorkOvernight = true;
@@ -78,6 +94,12 @@ public class Employee {
             alreadyNo = true;
         }
     }
+    
+    
+    /**
+     * self explanatory, poor grammar
+     * @return true of false if they can or cannot work the day
+     */
     
 	public boolean isCanWorkMonday() {
 		return canWorkMonday;
@@ -107,6 +129,9 @@ public class Employee {
 		return canWorkOvernight;
 	}
 
+	/**
+	 * Returns the name and what days they can work
+	 */
 	public String toString()
 	{
 		String s = name + " can work ";

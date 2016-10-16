@@ -8,11 +8,19 @@ public class Scheduler {
 	boolean overnightFilled;
 	String day;
 	
+	/**
+	 * 
+	 * @param day	day that needs to be scheduled
+	 */
+	
 	public Scheduler(String day) {
 		this.employees = new ArrayList<Employee>();
 		this.day = day;
 	}
 	
+	/**
+	 * schedules the day
+	 */
 	public void schedule()
 	{
 		switch (day){
@@ -71,11 +79,18 @@ public class Scheduler {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param list complete arraylist of employees
+	 */
 	public void addEmployees(ArrayList<Employee> list)
 	{
 		employees.addAll(list);
 	}
-	
+	/**
+	 * 
+	 * @return list of employees
+	 */
 	public ArrayList<Employee> getEmployees() {
 		return employees;
 	}
