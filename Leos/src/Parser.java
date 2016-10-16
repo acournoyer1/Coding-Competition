@@ -71,7 +71,7 @@ public class Parser {
                     		   
                     	   } else {
                     		   n = 0;
-                    		   tempQuantity = Integer.parseInt(cell.getText());
+                    		   tempQuantity = Integer.parseInt(cell.getText().replaceAll("[^0-9]",""));
                     	   }
                    
                 	   }
@@ -82,9 +82,17 @@ public class Parser {
                }
 		   }
 		   return items;
-     }
+           }
 	
+	public static void main(String args[]) {
+		Parser p = new Parser();
+		try {
+			p.parseItems();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }
-
-
 
