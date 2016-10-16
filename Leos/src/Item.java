@@ -56,7 +56,7 @@ public class Item {
 	}
 	
 	public String toString(){
-		return ("Item: "+name + " " + "Expiry: "expirydate + " "+ "Quantity"+quantity);
+		return ("Item: "+name + " " + "Expiry: " + expirydate + " "+ "Quantity"+quantity);
 	}
 
 
