@@ -8,15 +8,18 @@ public class Item {
 	private String name;
 	private LocalDate expirydate;
 	private int quantity;
+	private int popularity;
 	
 	public Item(String name, LocalDate expirydate, int quantity){
 		this(name,expirydate);
 		this.quantity = quantity;
+		this.popularity = 0;
 	}
 	
 	public Item(String name, LocalDate expirydate){
 		this.name = name;
 		this.expirydate = expirydate;
+		this.popularity = 0;
 	}
 
 	public LocalDate getExpirydate() {
@@ -31,7 +34,8 @@ public class Item {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void decrementQuantity() {
+		quantity--;
+		popularity++;
 	}
 }
