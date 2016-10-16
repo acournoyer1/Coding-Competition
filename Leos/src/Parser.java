@@ -13,7 +13,7 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 public class Parser {
 	
-	
+	/*
 	public ArrayList<Employee> parseEmployee() throws IOException {
 		ArrayList<Employee> employees = new ArrayList<>();
 		FileInputStream fis = new FileInputStream("./Programming Employee List (1).docx");
@@ -45,6 +45,7 @@ public class Parser {
 		   }
 		   return employees;
            }
+           */
 
 	
 	public ArrayList<Item> parseItems() throws IOException{
