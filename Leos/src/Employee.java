@@ -107,6 +107,16 @@ public class Employee {
 		return canWorkOvernight;
 	}
 
-	public static void main(String[] args){
+	public String toString()
+	{
+		String s = name + " can work ";
+		if(canWorkMonday) s += "Monday ";
+		if(canWorkTuesday) s+= "Tuesday ";
+		if(canWorkWednesday) s+= "Wednesday ";
+		if(canWorkThursday) s+= "Thursday ";
+		if(canWorkFriday) s+= "Friday ";
+		if(canWorkSaturday) s+= "Saturday ";
+		if(canWorkOvernight) s+= "and overnight";
+		return s;
 	}
 }

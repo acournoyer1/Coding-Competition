@@ -14,9 +14,9 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 public class Parser {
 	
 	
-	public ArrayList<Employee> parseEmployee() throws IOException {
+	public ArrayList<Employee> parseEmployees(File file) throws IOException {
 		ArrayList<Employee> employees = new ArrayList<>();
-		FileInputStream fis = new FileInputStream("./Programming Employee List (1).docx");
+		FileInputStream fis = new FileInputStream(file);
 		String tempName = "";
 		String  tempDate = "";
 		String test="";

@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -22,9 +24,11 @@ public class GUI extends JFrame{
 	private JButton advanceTime;
 	private Parser parser;
 	private Stock stock;
+	private Scheduler scheduler;
 	
 	public GUI()
-	{ 
+	{
+		scheduler = new Scheduler("Monday");
 		parser = new Parser();
 		stock = new Stock();
 		textArea = new JTextArea();
@@ -118,6 +122,13 @@ public class GUI extends JFrame{
 			{
 				File file = getFile("Import Employee");
 				if(file == null) return;
+				try {
+					ArrayList<Employee> employees = parser.parseEmployees(file);
+					employees.remove(0);
+					scheduler.addEmployees(employees);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				textArea.append(file.getName() + " has been imported to the employee list. \n");
 			}
 		});
@@ -127,10 +138,6 @@ public class GUI extends JFrame{
 			public void actionPerformed(ActionEvent e) 
 			{
 				File file = getFile("Import Stock");
-				if(file == null)
-				{
-					return;
-				}
 				try {
 					stock.addItem(parser.parseItems(file));
 				} catch (IOException e1) {
@@ -151,6 +158,25 @@ public class GUI extends JFrame{
 					e1.printStackTrace();
 				}
 				if(file == null) return;
+				try {
+					file.createNewFile();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				FileOutputStream fos = null;
+				try {
+					fos = new FileOutputStream(file);
+				} catch (FileNotFoundException e2) {
+					e2.printStackTrace();
+				}
+				for(Employee employee: scheduler.getEmployees())
+				{
+					try {
+						fos.write((employee.toString() + "\n").getBytes());
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
 				textArea.append(file.getName() + " has been exported. \n");
 			}
 		});
@@ -161,7 +187,6 @@ public class GUI extends JFrame{
 			{
 				File file = saveFile("Export Employees");
 				if(file == null) return;
-				file.renameTo(new File(file.getAbsolutePath() + ".txt"));
 				try {
 					file.createNewFile();
 				} catch (IOException e1) {
@@ -196,6 +221,15 @@ public class GUI extends JFrame{
 			{
 				textArea.append("Current inventory: \n");
 				for(Item i: stock.getItems())textArea.append(i.toString() + "\n");
+			}
+		});
+		viewEmployees.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				textArea.append("Current inventory: \n");
+				for(Employee employee: scheduler.getEmployees())textArea.append(employee.toString() + "\n");
 			}
 		});
 	}
