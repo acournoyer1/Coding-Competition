@@ -21,19 +21,19 @@ public class Stock {
 	}
 	
 	
-	public ArrayList<Item> criticalItems(){
-		ArrayList<Item> critical = new ArrayList<Item>();
-		Date currentTime = new Date(System.currentTimeMillis());
-		int currentYear = currentTime.getYear();
-		int currentMonth = currentTime.getMonth();
-		int currentDay = currentTime.getDay();
-		
-		for(Item it: items){
-			int itYear = it.getExpirydate().getYear();
-			int itMonth = it.getExpirydate().getMonthValue();
-			
-		}
-	}
+//	public ArrayList<Item> criticalItems(){
+//		ArrayList<Item> critical = new ArrayList<Item>();
+//		Date currentTime = new Date(System.currentTimeMillis());
+//		int currentYear = currentTime.getYear();
+//		int currentMonth = currentTime.getMonth();
+//		int currentDay = currentTime.getDay();
+//		
+//		for(Item it: items){
+//			int itYear = it.getExpirydate().getYear();
+//			int itMonth = it.getExpirydate().getMonthValue();
+//			
+//		}
+//	}
 	
 	
 	public Item getTopSeller(){
@@ -47,15 +47,15 @@ public class Stock {
 	}
 	
 	
-	public static void main(String args[]) throws IOException{
-		Stock s = new Stock();
-		System.out.println("TEST");
-		
-		s.addItem(Parser.parseItems());
-		System.out.println(s.items.size());
-		for(Item i : s.items){
-			System.out.println(i);
-		}
-	}
+//	public static void main(String args[]) throws IOException{
+//		Stock s = new Stock();
+//		System.out.println("TEST");
+//		
+//		s.addItem(Parser.parseItems());
+//		System.out.println(s.items.size());
+//		for(Item i : s.items){
+//			System.out.println(i);
+//		}
+//	}
 		
 }

@@ -101,16 +101,6 @@ public class Parser {
 		   }
 		   return items;
            }
-	
-	public static void main(String args[]) {
-		Parser p = new Parser();
-		try {
-			p.parseItems();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 }
 

@@ -17,7 +17,7 @@ public class Employee {
 	private boolean canWorkFriday = false;
 	private boolean canWorkSaturday = false;
 	private boolean canWorkOvernight = false;
-	private HashMap<DayOfWeek, AvailabilityTime> availability;
+	//private HashMap<DayOfWeek, AvailabilityTime> availability;
 	
 	public Employee(String name, String availablility) {
 		this.name = name;
