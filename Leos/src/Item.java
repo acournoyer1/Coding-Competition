@@ -14,10 +14,10 @@ import java.text.SimpleDateFormat;
  *
  */
 public class Item {
-	private String name;
-	private LocalDate expirydate;
-	private int quantity;
-	private int popularity;
+	public String name;
+	public LocalDate expirydate;
+	public int quantity;
+	public int popularity;
 	
 	public Item(String name, String expirydate, int quantity){
 		this(name,expirydate);
@@ -55,9 +55,17 @@ public class Item {
 		popularity++;
 	}
 	
-	public static void main(String args[]){
-		//Item t = new Item();
-		//LocalDate d = t.convertDate("Jun 16, 2018");
-		//System.out.println(d);
+	public String toString(){
+		return (name + " " + expirydate + " "+ quantity);
+	}
+
+
+	public int getPopularity() {
+		return popularity;
+	}
+
+	public void setPopularity(int popularity) {
+		this.popularity = popularity;
 	}
 }
+
