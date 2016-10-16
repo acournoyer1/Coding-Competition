@@ -1,6 +1,10 @@
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -15,10 +19,16 @@ public class GUI extends JFrame{
 	private JMenuItem viewEmployees;
 	private JMenuItem viewStock;
 	private JButton notificationButton;
+	private JButton advanceTime;
+	private Parser parser;
+	private Stock stock;
 	
 	public GUI()
 	{ 
+		parser = new Parser();
+		stock = new Stock();
 		textArea = new JTextArea();
+		JScrollPane scrollPane = new JScrollPane(textArea);
 		importEmployees = new JMenuItem("Employees");
 		importStock = new JMenuItem("Stock");
 		exportStock = new JMenuItem("Stock");
@@ -26,6 +36,7 @@ public class GUI extends JFrame{
 		viewStock = new JMenuItem("Stock");
 		viewEmployees = new JMenuItem("Employees");
 		notificationButton = new JButton();
+		advanceTime = new JButton("Advance Time");
 		
 		JMenuBar menu = new JMenuBar();
 		JMenu fileMenu = new JMenu("File");
@@ -49,12 +60,15 @@ public class GUI extends JFrame{
 		JSplitPane pane = new JSplitPane();
 		pane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		pane.setDividerSize(1);
-		System.out.println();
 		pane.setDividerLocation((int)(this.getHeight()*0.75));
-		pane.setTopComponent(textArea);
-		pane.setBottomComponent(notificationButton);
+		pane.setTopComponent(scrollPane);
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(1,2));
+		panel.add(advanceTime);
+		panel.add(notificationButton);
+		notificationButton.setEnabled(false);
+		pane.setBottomComponent(panel);
 		
-		notificationButton.setSize(50, 50);
 		pane.setEnabled(false);
 		textArea.setEditable(false);
 		
@@ -113,7 +127,15 @@ public class GUI extends JFrame{
 			public void actionPerformed(ActionEvent e) 
 			{
 				File file = getFile("Import Stock");
-				if(file == null) return;
+				if(file == null)
+				{
+					return;
+				}
+				try {
+					stock.addItem(parser.parseItems(file));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				textArea.append(file.getName() + " has been imported to the stock. \n");
 			}
 		});
@@ -139,7 +161,41 @@ public class GUI extends JFrame{
 			{
 				File file = saveFile("Export Employees");
 				if(file == null) return;
+				file.renameTo(new File(file.getAbsolutePath() + ".txt"));
+				try {
+					file.createNewFile();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				FileOutputStream fos = null;
+				try {
+					fos = new FileOutputStream(file);
+				} catch (FileNotFoundException e2) {
+					e2.printStackTrace();
+				}
+				for(Item i: stock.getItems())
+				{
+					try {
+						fos.write((i.toString() + "\n").getBytes());
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
 				textArea.append(file.getName() + " has been exported. \n");
+				try {
+					fos.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		viewStock.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				textArea.append("Current inventory: \n");
+				for(Item i: stock.getItems())textArea.append(i.toString() + "\n");
 			}
 		});
 	}

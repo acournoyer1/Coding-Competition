@@ -48,9 +48,9 @@ public class Parser {
            */
 
 	
-	public ArrayList<Item> parseItems() throws IOException{
+	public ArrayList<Item> parseItems(File file) throws IOException{
 		ArrayList<Item> items = new ArrayList<>();
-		FileInputStream fis = new FileInputStream("./Programming Food List (1).docx");
+		FileInputStream fis = new FileInputStream(file);
 		int x = 0;
 		String tempName = "";
 		int tempQuantity = 0;

@@ -15,6 +15,11 @@ public class Stock {
 		items.addAll(food);
 	}
 	
+	public ArrayList<Item> getItems()
+	{
+		return items;
+	}
+	
 	
 	public ArrayList<Item> criticalItems(){
 		ArrayList<Item> critical = new ArrayList<Item>();
