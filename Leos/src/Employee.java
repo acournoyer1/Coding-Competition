@@ -1,66 +1,110 @@
 import java.util.HashMap;
 
+import javax.management.timer.Timer;
+
 import org.omg.PortableServer.ServantActivator;
 
+import java.security.spec.ECPrivateKeySpec;
+import java.sql.Time;
 import java.time.*;
 
 public class Employee {
 	private String name;
+	private boolean canWorkMonday = false;
+	private boolean canWorkTuesday = false;
+	private boolean canWorkWednesday = false;
+	private boolean canWorkThursday = false;
+	private boolean canWorkFriday = false;
+	private boolean canWorkSaturday = false;
+	private boolean canWorkOvernight = false;
 	private HashMap<DayOfWeek, AvailabilityTime> availability;
-	private boolean overnight;
 	
 	public Employee(String name, String availablility) {
 		this.name = name;
 		String[] days = availablility.split(", ");
 		for(String day: days){
-			day.split(" ");
-			
+			if(day.contains("-")){
+				parseRange();
+			} else {
+				String[] b = day.split(" ");
+				parseAvailability(b);
+			}
 		}
+	}
+	
+	public void parseRange(){
+		canWorkMonday = true;
+		canWorkTuesday = true;
+		canWorkWednesday = true;
+		canWorkThursday = true;
+		canWorkFriday = true;
 	}
 	
 	public void parseAvailability(String[] a){
-		DayOfWeek day;
-		boolean dayInFront = true;
+		DayOfWeek day = null;
 		for (int i = 0; i < a.length; i++){
 			switch (a[i]){
 				case "Monday":
-					day = DayOfWeek.MONDAY;
+					canWorkMonday = true;
 					break;
 				case "Tuesday":
-					day = DayOfWeek.TUESDAY;
+					canWorkTuesday = true;
 					break;
 				case "Wednesday":
-					day = DayOfWeek.WEDNESDAY;
+					canWorkWednesday = true;
 					break;
 				case "Thursday":
-					day = DayOfWeek.THURSDAY;
+					canWorkThursday = true;
 					break;
 				case "Friday":
-					day = DayOfWeek.FRIDAY;
+					canWorkFriday = true;
 					break;
 				case "Saturday":
-					day = DayOfWeek.SATURDAY;
-					break;
-				case "Sunday":
-					day = DayOfWeek.SUNDAY;
+					canWorkSaturday = true;
 					break;
 				default:
-					dayInFront = false;
+					checkOvernight(a[i]);
 					break;
-			}
-			if(dayInFront){
-				if (a[i].equals("no") && a[i + 1].equals("overnight")){
-					
-				} else if (a[i].equals("overnight")){
-					
-				}
-			} else {
-				
-			}
+			}		
 		}
 	}
 	
+	private void checkOvernight(String a){
+		if(a.equals("overnight")){
+			canWorkOvernight = true;
+		} else if (a.equals("no")) {
+			canWorkOvernight = false;
+		}
+	}
+	
+	public boolean isCanWorkMonday() {
+		return canWorkMonday;
+	}
+
+	public boolean isCanWorkTuesday() {
+		return canWorkTuesday;
+	}
+
+	public boolean isCanWorkWednesday() {
+		return canWorkWednesday;
+	}
+
+	public boolean isCanWorkThursday() {
+		return canWorkThursday;
+	}
+
+	public boolean isCanWorkFriday() {
+		return canWorkFriday;
+	}
+
+	public boolean isCanWorkSaturday() {
+		return canWorkSaturday;
+	}
+
+	public boolean isCanWorkOvernight() {
+		return canWorkOvernight;
+	}
+
 	public static void main(String[] args){
-		
 	}
 }
