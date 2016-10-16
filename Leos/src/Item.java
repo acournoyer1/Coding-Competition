@@ -30,7 +30,10 @@ public class Item {
 		this.expirydate = convertDate(expirydate);
 		this.popularity = 0;
 	}
-	public Item(){}
+	
+	/*
+	 * Converts a date string to a LocalDate object
+	 */
 	private LocalDate convertDate(String date){
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy");
 		formatter = formatter.withLocale(Locale.US);  
@@ -38,32 +41,52 @@ public class Item {
 		return d;
 	}
 	
+	/*
+	 * Returns the expiry date
+	 */
 	public LocalDate getExpirydate() {
 		return expirydate;
 	}
 
+	/*
+	 * Sets the expiry date
+	 */
 	public void setExpirydate(LocalDate expirydate) {
 		this.expirydate = expirydate;
 	}
-
+	
+	/*
+	 * Returns the quantity
+	 */
 	public int getQuantity() {
 		return quantity;
 	}
 
+	/*
+	 * Decrements the quantity and increments the quantity, called if someone buys an item
+	 */
 	public void decrementQuantity() {
 		quantity--;
 		popularity++;
 	}
 	
+	/*
+	 * Returns a string representation of the Item
+	 */
 	public String toString(){
-		return ("Item: "+name + ", " + "Expiry: " + expirydate + ", "+ "Quantity "+quantity);
+		return ("Item: "+name + ", " + "Expiry: " + expirydate + ", "+ "Quantity: "+quantity);
 	}
 
-
+	/*
+	 * Returns an item's popularity
+	 */
 	public int getPopularity() {
 		return popularity;
 	}
-
+	
+	/*
+	 * Sets an item's popularity
+	 */
 	public void setPopularity(int popularity) {
 		this.popularity = popularity;
 	}

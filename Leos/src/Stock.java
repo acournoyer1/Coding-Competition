@@ -10,32 +10,25 @@ public class Stock {
 	public Stock(){
 		this.items = new ArrayList<Item>();
 	}
-
+	
+	/*
+	 * Adds a list of items to the inventory
+	 */
 	public void addItem(ArrayList<Item> food){
 		items.addAll(food);
 	}
 	
+	/*
+	 * Returns the items in the inventory
+	 */
 	public ArrayList<Item> getItems()
 	{
 		return items;
 	}
 	
-	
-//	public ArrayList<Item> criticalItems(){
-//		ArrayList<Item> critical = new ArrayList<Item>();
-//		Date currentTime = new Date(System.currentTimeMillis());
-//		int currentYear = currentTime.getYear();
-//		int currentMonth = currentTime.getMonth();
-//		int currentDay = currentTime.getDay();
-//		
-//		for(Item it: items){
-//			int itYear = it.getExpirydate().getYear();
-//			int itMonth = it.getExpirydate().getMonthValue();
-//			
-//		}
-//	}
-	
-	
+	/*
+	 * Returns the top selling item
+	 */
 	public Item getTopSeller(){
 		topSeller = items.get(0);
 		for(Item it: items){
@@ -45,17 +38,5 @@ public class Stock {
 		}
 		return topSeller;
 	}
-	
-	
-//	public static void main(String args[]) throws IOException{
-//		Stock s = new Stock();
-//		System.out.println("TEST");
-//		
-//		s.addItem(Parser.parseItems());
-//		System.out.println(s.items.size());
-//		for(Item i : s.items){
-//			System.out.println(i);
-//		}
-//	}
 		
 }

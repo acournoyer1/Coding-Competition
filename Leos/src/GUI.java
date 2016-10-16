@@ -82,6 +82,9 @@ public class GUI extends JFrame{
 		this.setVisible(true);
 	}
 	
+	/*
+	 * Lets the user select the file path they want to use
+	 */
 	private File saveFile(String title)
 	{
 		JFileChooser fileSaver = new JFileChooser();
@@ -97,6 +100,9 @@ public class GUI extends JFrame{
 		}
 	}
 	
+	/*
+	 * Lets the user select the file they want to import
+	 */
 	private File getFile(String title)
 	{
 		JFileChooser fileFinder = new JFileChooser();
@@ -113,6 +119,9 @@ public class GUI extends JFrame{
 		}
 	}
 	
+	/*
+	 * Sets up all the listeners for the buttons
+	 */
 	private void setUpButtons()
 	{
 		importEmployees.addActionListener(new ActionListener()
@@ -234,6 +243,9 @@ public class GUI extends JFrame{
 		});
 	}
 	
+	/*
+	 * Makes the GUI and sets it up
+	 */
 	public static void main(String args[])
 	{
 		GUI gui = new GUI();
